@@ -640,8 +640,8 @@ function renderQuarterMeta() {
   const daysElapsed = daysBetween(startDate, refreshDate) + 1;
   const daysRemaining = totalDays - daysElapsed;
   const pctThrough = (daysElapsed / totalDays) * 100;
-  const weekNum = Math.ceil(daysElapsed / 7);
-  const totalWeeks = Math.ceil(totalDays / 7);
+  const totalWeeks = Math.round(totalDays / 7); // a quarter = 13 weeks (round, not ceil)
+  const weekNum = Math.min(Math.ceil(daysElapsed / 7), totalWeeks);
 
   document.getElementById("quarter-meta").innerHTML = `
     <div class="item"><span class="label">Week</span><span class="value">${weekNum} / ${totalWeeks}</span></div>
